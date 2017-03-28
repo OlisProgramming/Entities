@@ -38,5 +38,8 @@
     <ClInclude Include="entity_factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="entity_fields.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

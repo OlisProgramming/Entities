@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include <fstream>
+#include <vector>
 
 class SaveFileWriter {
 
@@ -15,6 +17,10 @@ public:
 
 	template<class T> inline void write(T t) {
 		ofs.write(reinterpret_cast<char*>(&t), sizeof(T));
+	}
+
+	template<class T> inline void write_array(T* t, size_t bytes) {
+		ofs.write(reinterpret_cast<char*>(t), bytes);
 	}
 };
 
@@ -32,5 +38,13 @@ public:
 		T t;
 		ifs.read(reinterpret_cast<char*>(&t), sizeof(T));
 		return t;
+	}
+
+	inline std::vector<char>* read_array(size_t bytes) {
+		std::vector<char>* vec = new std::vector<char>(bytes);
+		//std::cout << bytes << std::endl;
+		ifs.read((char*)(&(*vec)[0]), bytes);
+		//std::cout << "Array: " << &(*vec)[0] << std::endl;
+		return vec;
 	}
 };
