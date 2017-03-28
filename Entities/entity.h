@@ -16,9 +16,9 @@ public:
 public:	\
 	type0 var0; \
 	virtual void save(SaveFileWriter& sfw) override { \
-		sfw.write(var0); \
+		sfw.write<type0>(var0); \
 	} \
 	virtual Entity* load(SaveFileReader& sfr) override { \
-		var0 = sfr.read_##type0(); \
+		var0 = sfr.read<type0>(); \
 		return this; \
 	}

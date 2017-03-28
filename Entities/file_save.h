@@ -13,7 +13,9 @@ public:
 	~SaveFileWriter();
 	void close();
 
-	void write(char c);
+	template<class T> inline void write(T t) {
+		ofs.write(reinterpret_cast<char*>(&t), sizeof(T));
+	}
 };
 
 class SaveFileReader {
@@ -26,5 +28,9 @@ public:
 	~SaveFileReader();
 	void close();
 
-	char read_char();
+	template<class T> inline T read() {
+		T t;
+		ifs.read(reinterpret_cast<char*>(&t), sizeof(T));
+		return t;
+	}
 };

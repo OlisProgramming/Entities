@@ -12,10 +12,10 @@ SaveFileWriter::~SaveFileWriter() {
 void SaveFileWriter::close() {
 	ofs.close();
 }
-
+/*
 void SaveFileWriter::write(char c) {
 	ofs.write(&c, 1);
-}
+}*/
 
 ///
 
@@ -32,9 +32,17 @@ void SaveFileReader::close() {
 	ifs.close();
 }
 
+/*
 char SaveFileReader::read_char() {
 	char c;
 	ifs.read(&c, 1);
 	return c;
-}
+}*/
+
+/*
+template<class T> T SaveFileReader::read(size_t size) {
+	T t;
+	ifs.read(&t, size);
+	return t;
+}*/
 
