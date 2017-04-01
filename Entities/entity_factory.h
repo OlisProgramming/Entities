@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include <unordered_map>
+#include <vector>
 #include "file_save.h"
 
 class EntityComponent;
@@ -16,6 +17,7 @@ public:
 	static EntityFactory* inst;
 	void registerEntComp(std::string name, std::function<EntityComponent*()> construction_func);
 	EntityComponent* constructEntComp(std::string name);
+	std::vector<std::string>* getEntComps();
 };
 
 #define ENT_REGISTER(name) EntityFactory::inst->registerEntComp(#name, []() { return new name(); })

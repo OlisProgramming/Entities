@@ -31,20 +31,28 @@ with open("entity_fields.h", 'w') as f:
 
     f.write("#pragma once\n\n")
 
+    f.write("#include <string>\n")
+
     f.write("inline size_t __ent_str_len(void* ptr) { return ((std::string*)ptr)->length(); }\n")
     f.write("inline void __ent_str_set(void* ptr, std::string& str) { *((std::string*)ptr) = str; }\n")
     f.write("inline const char* __ent_str_cstr(void* ptr) { return ((std::string*)ptr)->c_str(); }\n\n")
     
     for i in range(1, FIELD_MAX+1):
-        f.write("#define ENT_REGISTER_FIELDS_" + str(i) + "(")
+        f.write("#define ENT_REGISTER_FIELDS_" + str(i) + "(name,")
         for j in range(0, i-1):
             f.write("type" + str(j) + ",var" + str(j) + ",")
         f.write("type" + str(i-1) + ",var" + str(i-1) + ") \\\npublic: \\\n")
         for j in range(0, i):
             f.write("\ttype" + str(j) + " var" + str(j) + "; \\\n")
 
+        f.write("\tvirtual inline std::string toString() override { \\\n")
+        f.write("\t\treturn #name ## \" ( \"")
+        for j in range(0, i):
+            f.write(" + std::to_string({var}) + \" \"".format(var="var"+str(j)))
+        f.write(" \")\";\\\n\t}\\\n");
 
         f.write("\tvirtual inline void save(SaveFileWriter& sfw) override { \\\n")
+        f.write("\t\tsfw.write<unsigned int>(sfw.getEntCompIndex(#name));\\\n");
 
         for j in range(0, i):
             f.write('\t\tif (#{type0} == "std::string" || #{type0} == "string") {{ \\\n'

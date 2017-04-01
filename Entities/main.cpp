@@ -3,23 +3,17 @@
 #include "entity.h"
 #include "entity_factory.h"
 
-/*struct Data {
-	unsigned int a;
-	unsigned long b;
-}; STRUCTS WORK */
-
 class EntityComponentPos3 : public EntityComponent {
 
 public:
 	EntityComponentPos3() {}
 
 	ENT_REGISTER_FIELDS_3(
+		EntityComponentPos3,
 		float, x,
 		float, y,
 		float, z
-	);
-
-	//ENT_REGISTER(EntTest1)
+	)
 };
 
 int main(int argc, char** argv) {
@@ -35,13 +29,17 @@ int main(int argc, char** argv) {
 	ent->y = 2;
 	ent->z = -0.5;
 
+	std::cout << ent->toString() << std::endl;
+
 	SaveFileWriter sfw("save.bin");
+	sfw.writeEntCompMap(EntityFactory::inst->getEntComps());
 	ent->save(sfw);
 	sfw.close();
 
 	delete ent;
 
 	SaveFileReader sfr("save.bin");
+	sfr.readEntCompMap();
 	EntityComponentPos3* ent1 = ENT_CONSTRUCT_SAVED(EntityComponentPos3, sfr);
 	sfr.close();
 

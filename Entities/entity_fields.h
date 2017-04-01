@@ -1,13 +1,18 @@
 #pragma once
 
+#include <string>
 inline size_t __ent_str_len(void* ptr) { return ((std::string*)ptr)->length(); }
 inline void __ent_str_set(void* ptr, std::string& str) { *((std::string*)ptr) = str; }
 inline const char* __ent_str_cstr(void* ptr) { return ((std::string*)ptr)->c_str(); }
 
-#define ENT_REGISTER_FIELDS_1(type0,var0) \
+#define ENT_REGISTER_FIELDS_1(name,type0,var0) \
 public: \
 	type0 var0; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -27,11 +32,15 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_2(type0,var0,type1,var1) \
+#define ENT_REGISTER_FIELDS_2(name,type0,var0,type1,var1) \
 public: \
 	type0 var0; \
 	type1 var1; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -65,12 +74,16 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_3(type0,var0,type1,var1,type2,var2) \
+#define ENT_REGISTER_FIELDS_3(name,type0,var0,type1,var1,type2,var2) \
 public: \
 	type0 var0; \
 	type1 var1; \
 	type2 var2; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -118,13 +131,17 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_4(type0,var0,type1,var1,type2,var2,type3,var3) \
+#define ENT_REGISTER_FIELDS_4(name,type0,var0,type1,var1,type2,var2,type3,var3) \
 public: \
 	type0 var0; \
 	type1 var1; \
 	type2 var2; \
 	type3 var3; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -186,14 +203,18 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_5(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4) \
+#define ENT_REGISTER_FIELDS_5(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4) \
 public: \
 	type0 var0; \
 	type1 var1; \
 	type2 var2; \
 	type3 var3; \
 	type4 var4; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -269,7 +290,7 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_6(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5) \
+#define ENT_REGISTER_FIELDS_6(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5) \
 public: \
 	type0 var0; \
 	type1 var1; \
@@ -277,7 +298,11 @@ public: \
 	type3 var3; \
 	type4 var4; \
 	type5 var5; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -367,7 +392,7 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_7(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6) \
+#define ENT_REGISTER_FIELDS_7(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6) \
 public: \
 	type0 var0; \
 	type1 var1; \
@@ -376,7 +401,11 @@ public: \
 	type4 var4; \
 	type5 var5; \
 	type6 var6; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -480,7 +509,7 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_8(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7) \
+#define ENT_REGISTER_FIELDS_8(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7) \
 public: \
 	type0 var0; \
 	type1 var1; \
@@ -490,7 +519,11 @@ public: \
 	type5 var5; \
 	type6 var6; \
 	type7 var7; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -608,7 +641,7 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_9(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8) \
+#define ENT_REGISTER_FIELDS_9(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8) \
 public: \
 	type0 var0; \
 	type1 var1; \
@@ -619,7 +652,11 @@ public: \
 	type6 var6; \
 	type7 var7; \
 	type8 var8; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " + std::to_string(var8) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \
@@ -751,7 +788,7 @@ public: \
 		return this; \
 	}
 
-#define ENT_REGISTER_FIELDS_10(type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8,type9,var9) \
+#define ENT_REGISTER_FIELDS_10(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8,type9,var9) \
 public: \
 	type0 var0; \
 	type1 var1; \
@@ -763,7 +800,11 @@ public: \
 	type7 var7; \
 	type8 var8; \
 	type9 var9; \
+	virtual inline std::string toString() override { \
+		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " + std::to_string(var8) + " " + std::to_string(var9) + " " ")";\
+	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
+		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
 		if (#type0 == "std::string" || #type0 == "string") { \
 			sfw.write<size_t>(__ent_str_len(&var0)); \
 			sfw.write_array<char>(const_cast<char*>(__ent_str_cstr(&var0)), __ent_str_len(&var0)); \

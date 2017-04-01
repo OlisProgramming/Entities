@@ -14,3 +14,11 @@ EntityComponent* EntityFactory::constructEntComp(std::string name) {
 		return map[name]();
 	}
 }
+
+std::vector<std::string>* EntityFactory::getEntComps() {
+	std::vector<std::string>* vec = new std::vector<std::string>();
+	for (auto pair : map) {
+		vec->push_back(pair.first);
+	}
+	return vec;
+}

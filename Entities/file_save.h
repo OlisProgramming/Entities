@@ -4,16 +4,22 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <unordered_map>
 
 class SaveFileWriter {
 
 private:
 	std::ofstream ofs;
+	std::vector<std::string>* entcomps;
+	std::unordered_map<std::string, unsigned int> entcompmap;
 
 public:
 	SaveFileWriter(std::string fname);
 	~SaveFileWriter();
 	void close();
+
+	unsigned int getEntCompIndex(std::string entcomp);
+	void writeEntCompMap(std::vector<std::string>* entcomps);
 
 	template<class T> inline void write(T t) {
 		ofs.write(reinterpret_cast<char*>(&t), sizeof(T));
@@ -28,11 +34,14 @@ class SaveFileReader {
 
 private:
 	std::ifstream ifs;
+	std::unordered_map<unsigned int, std::string> entcompmap;
 
 public:
 	SaveFileReader(std::string fname);
 	~SaveFileReader();
 	void close();
+
+	void readEntCompMap();
 
 	template<class T> inline T read() {
 		T t;

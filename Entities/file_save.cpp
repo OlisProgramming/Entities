@@ -11,11 +11,25 @@ SaveFileWriter::~SaveFileWriter() {
 
 void SaveFileWriter::close() {
 	ofs.close();
+	delete entcomps;
 }
-/*
-void SaveFileWriter::write(char c) {
-	ofs.write(&c, 1);
-}*/
+
+unsigned int SaveFileWriter::getEntCompIndex(std::string entcomp) {
+	return entcompmap[entcomp];
+}
+
+void SaveFileWriter::writeEntCompMap(std::vector<std::string>* entcomps) {
+	this->entcomps = entcomps;
+	unsigned int i = 0;
+	for (std::string s : *entcomps) {
+		entcompmap.emplace(s, i++);
+		for (char chr : s) {
+			write(chr);
+		}
+		write('\0');
+	}
+	write('\1');
+}
 
 ///
 
@@ -32,17 +46,20 @@ void SaveFileReader::close() {
 	ifs.close();
 }
 
-/*
-char SaveFileReader::read_char() {
+void SaveFileReader::readEntCompMap() {
+	std::string s;
 	char c;
-	ifs.read(&c, 1);
-	return c;
-}*/
+	unsigned int i = 0;
+	do {
+		do {
+			c = read<char>();
+			//std::cout << c;
+			s += c;
+		} while (c != '\0' && c != '\1');
+		entcompmap.emplace(i++, s);
+	} while (c != '\1');
 
-/*
-template<class T> T SaveFileReader::read(size_t size) {
-	T t;
-	ifs.read(&t, size);
-	return t;
-}*/
-
+	for (auto item : entcompmap) {
+		std::cout << item.first << " " << item.second << "\n";
+	}
+}
