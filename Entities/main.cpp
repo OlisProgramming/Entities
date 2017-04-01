@@ -8,16 +8,15 @@
 	unsigned long b;
 }; STRUCTS WORK */
 
-class EntTest1 : public Entity {
+class EntityComponentPos3 : public EntityComponent {
 
 public:
-	EntTest1() {}
+	EntityComponentPos3() {}
 
-	ENT_REGISTER_FIELDS_4(
-		std::string, s,
-		unsigned long long, a,
-		char, q,
-		std::string, s2
+	ENT_REGISTER_FIELDS_3(
+		float, x,
+		float, y,
+		float, z
 	);
 
 	//ENT_REGISTER(EntTest1)
@@ -29,13 +28,12 @@ int main(int argc, char** argv) {
 //	EntityFactory::inst->registerEnt("EntTest1", []() { return new EntTest1(); });
 
 
-	ENT_REGISTER(EntTest1);
+	ENT_REGISTER(EntityComponentPos3);
 
-	EntTest1* ent = ENT_CONSTRUCT_BLANK(EntTest1);
-	ent->s = "Hello, World!";
-	ent->a = 1024;
-	ent->q = 'A';
-	ent->s2 = "uagsodiuad";
+	EntityComponentPos3* ent = ENT_CONSTRUCT_BLANK(EntityComponentPos3);
+	ent->x = 1;
+	ent->y = 2;
+	ent->z = -0.5;
 
 	SaveFileWriter sfw("save.bin");
 	ent->save(sfw);
@@ -44,10 +42,10 @@ int main(int argc, char** argv) {
 	delete ent;
 
 	SaveFileReader sfr("save.bin");
-	EntTest1* ent1 = ENT_CONSTRUCT_SAVED(EntTest1, sfr);
+	EntityComponentPos3* ent1 = ENT_CONSTRUCT_SAVED(EntityComponentPos3, sfr);
 	sfr.close();
 
-	std::cout << ent1->s << " " << ent1->a << " " << ent->q << " " << ent->s2 << std::endl;
+	std::cout << ent1->x << " " << ent1->y << " " << ent1->z << std::endl;
 
 	delete ent1;
 	delete EntityFactory::inst;

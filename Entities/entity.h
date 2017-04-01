@@ -4,11 +4,11 @@
 
 class EntityFactory;
 
-class Entity {
+class EntityComponent {
 
 public:
-	Entity();
-	virtual Entity* load(SaveFileReader& sfr);
+	EntityComponent();
+	virtual EntityComponent* load(SaveFileReader& sfr);
 	virtual void save(SaveFileWriter& sfw);
 };
 

@@ -15,7 +15,7 @@ public: \
 		else \
 			sfw.write<type0>(var0); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -45,7 +45,7 @@ public: \
 		else \
 			sfw.write<type1>(var1); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -90,7 +90,7 @@ public: \
 		else \
 			sfw.write<type2>(var2); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -150,7 +150,7 @@ public: \
 		else \
 			sfw.write<type3>(var3); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -225,7 +225,7 @@ public: \
 		else \
 			sfw.write<type4>(var4); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -315,7 +315,7 @@ public: \
 		else \
 			sfw.write<type5>(var5); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -420,7 +420,7 @@ public: \
 		else \
 			sfw.write<type6>(var6); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -540,7 +540,7 @@ public: \
 		else \
 			sfw.write<type7>(var7); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -675,7 +675,7 @@ public: \
 		else \
 			sfw.write<type8>(var8); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \
@@ -825,7 +825,7 @@ public: \
 		else \
 			sfw.write<type9>(var9); \
 	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
+	virtual inline EntityComponent* load(SaveFileReader& sfr) override { \
 		if (#type0 == "std::string" || #type0 == "string") { \
 			size_t size = sfr.read<size_t>(); \
 			auto vec = sfr.read_array(size); \

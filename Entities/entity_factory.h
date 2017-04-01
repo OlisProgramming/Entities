@@ -5,19 +5,19 @@
 #include <unordered_map>
 #include "file_save.h"
 
-class Entity;
+class EntityComponent;
 
 class EntityFactory {
 
 private:
-	std::unordered_map<std::string, std::function<Entity*()>> map;
+	std::unordered_map<std::string, std::function<EntityComponent*()>> map;
 
 public:
 	static EntityFactory* inst;
-	void registerEnt(std::string name, std::function<Entity*()> construction_func);
-	Entity* constructEnt(std::string name);
+	void registerEntComp(std::string name, std::function<EntityComponent*()> construction_func);
+	EntityComponent* constructEntComp(std::string name);
 };
 
-#define ENT_REGISTER(name) EntityFactory::inst->registerEnt(#name, []() { return new name(); })
-#define ENT_CONSTRUCT_BLANK(name) (static_cast<name*>(EntityFactory::inst->constructEnt(#name)))
+#define ENT_REGISTER(name) EntityFactory::inst->registerEntComp(#name, []() { return new name(); })
+#define ENT_CONSTRUCT_BLANK(name) (static_cast<name*>(EntityFactory::inst->constructEntComp(#name)))
 #define ENT_CONSTRUCT_SAVED(name, sfr) (static_cast<name*>(ENT_CONSTRUCT_BLANK(name)->load(sfr)))

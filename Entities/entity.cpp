@@ -1,11 +1,11 @@
 #include "entity.h"
 
-Entity::Entity() {
+EntityComponent::EntityComponent() {
 }
 
-Entity* Entity::load(SaveFileReader& sfr) {
+EntityComponent* EntityComponent::load(SaveFileReader& sfr) {
 	return this;
 }
 
-void Entity::save(SaveFileWriter& sfw) {
+void EntityComponent::save(SaveFileWriter& sfw) {
 }

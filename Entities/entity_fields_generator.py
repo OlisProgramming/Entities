@@ -54,7 +54,7 @@ with open("entity_fields.h", 'w') as f:
 		'\t\telse \\\n'
 			'\t\t\tsfw.write<{type0}>({var0}); \\\n'.format(type0="type"+str(j), var0="var"+str(j)))
 
-        f.write("\t} \\\n\tvirtual inline Entity* load(SaveFileReader& sfr) override { \\\n")
+        f.write("\t} \\\n\tvirtual inline EntityComponent* load(SaveFileReader& sfr) override { \\\n")
 
         for j in range(0, i):
             f.write('\t\tif (#{type0} == "std::string" || #{type0} == "string") {{ \\\n'
@@ -69,3 +69,5 @@ with open("entity_fields.h", 'w') as f:
         f.write("\t\treturn this; \\\n\t}")
         
         f.write("\n\n")
+
+print("Complete.")
