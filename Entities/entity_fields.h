@@ -1,15 +1,23 @@
 #pragma once
 
 #include <string>
+#include <sstream>
+
 inline size_t __ent_str_len(void* ptr) { return ((std::string*)ptr)->length(); }
 inline void __ent_str_set(void* ptr, std::string& str) { *((std::string*)ptr) = str; }
 inline const char* __ent_str_cstr(void* ptr) { return ((std::string*)ptr)->c_str(); }
+inline std::string __ent_str_tostr(void* ptr) { return *((std::string*)(ptr)); }
+template<typename T> std::string __ent_tostr_not_str(T val) {
+	std::stringstream ss;
+	ss << val;
+	return ss.str();
+}
 
 #define ENT_REGISTER_FIELDS_1(name,type0,var0) \
 public: \
 	type0 var0; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -37,7 +45,7 @@ public: \
 	type0 var0; \
 	type1 var1; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -80,7 +88,7 @@ public: \
 	type1 var1; \
 	type2 var2; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -138,7 +146,7 @@ public: \
 	type2 var2; \
 	type3 var3; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -211,7 +219,7 @@ public: \
 	type3 var3; \
 	type4 var4; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -299,7 +307,7 @@ public: \
 	type4 var4; \
 	type5 var5; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " + __ent_tostr_not_str<type5>(var5) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -402,7 +410,7 @@ public: \
 	type5 var5; \
 	type6 var6; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " + __ent_tostr_not_str<type5>(var5) + " " + __ent_tostr_not_str<type6>(var6) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -520,7 +528,7 @@ public: \
 	type6 var6; \
 	type7 var7; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " + __ent_tostr_not_str<type5>(var5) + " " + __ent_tostr_not_str<type6>(var6) + " " + __ent_tostr_not_str<type7>(var7) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -653,7 +661,7 @@ public: \
 	type7 var7; \
 	type8 var8; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " + std::to_string(var8) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " + __ent_tostr_not_str<type5>(var5) + " " + __ent_tostr_not_str<type6>(var6) + " " + __ent_tostr_not_str<type7>(var7) + " " + __ent_tostr_not_str<type8>(var8) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\
@@ -801,7 +809,7 @@ public: \
 	type8 var8; \
 	type9 var9; \
 	virtual inline std::string toString() override { \
-		return #name ## " ( " + std::to_string(var0) + " " + std::to_string(var1) + " " + std::to_string(var2) + " " + std::to_string(var3) + " " + std::to_string(var4) + " " + std::to_string(var5) + " " + std::to_string(var6) + " " + std::to_string(var7) + " " + std::to_string(var8) + " " + std::to_string(var9) + " " ")";\
+		return #name ## " ( " + __ent_tostr_not_str<type0>(var0) + " " + __ent_tostr_not_str<type1>(var1) + " " + __ent_tostr_not_str<type2>(var2) + " " + __ent_tostr_not_str<type3>(var3) + " " + __ent_tostr_not_str<type4>(var4) + " " + __ent_tostr_not_str<type5>(var5) + " " + __ent_tostr_not_str<type6>(var6) + " " + __ent_tostr_not_str<type7>(var7) + " " + __ent_tostr_not_str<type8>(var8) + " " + __ent_tostr_not_str<type9>(var9) + " " ")";\
 	}\
 	virtual inline void save(SaveFileWriter& sfw) override { \
 		sfw.write<unsigned int>(sfw.getEntCompIndex(#name));\

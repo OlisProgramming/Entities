@@ -8,11 +8,12 @@ class EntityComponentPos3 : public EntityComponent {
 public:
 	EntityComponentPos3() {}
 
-	ENT_REGISTER_FIELDS_3(
+	ENT_REGISTER_FIELDS_4(
 		EntityComponentPos3,
 		float, x,
 		float, y,
-		float, z
+		float, z,
+		std::string, q
 	)
 };
 
@@ -28,6 +29,7 @@ int main(int argc, char** argv) {
 	ent->x = 1;
 	ent->y = 2;
 	ent->z = -0.5;
+	ent->q = "Hello, World!";
 
 	std::cout << ent->toString() << std::endl;
 

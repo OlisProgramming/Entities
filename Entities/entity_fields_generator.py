@@ -1,41 +1,22 @@
 FIELD_MAX = 10
 
-'''
-
-#define ENT_REGISTER_FIELDS(type0,var0) \
-public:	\
-	type0 var0; \
-	virtual inline void save(SaveFileWriter& sfw) override { \
-		if (#type0 == "std::string" || #type0 == "string") { \
-			sfw.write<size_t>(var0.length()); \
-			sfw.write_array<char>(const_cast<char*>(var0.c_str()), var0.length()); \
-		} \
-		else \
-			sfw.write<type0>(var0); \
-	} \
-	virtual inline Entity* load(SaveFileReader& sfr) override { \
-		if (#type0 == "std::string" || #type0 == "string") {\
-\
-			size_t size = sfr.read<size_t>(); \
-			auto vec = sfr.read_array(size); \
-			var0 = std::string(&(*vec)[0], &(*vec)[0] + size); \
-			delete vec; \
-		} \
-		else \
-			var0 = sfr.read<std::string>(); \
-		return this; \
-	}
-'''
-
 with open("entity_fields.h", 'w') as f:
 
     f.write("#pragma once\n\n")
 
-    f.write("#include <string>\n")
+    f.write("#include <string>\n#include <sstream>\n\n")
 
     f.write("inline size_t __ent_str_len(void* ptr) { return ((std::string*)ptr)->length(); }\n")
     f.write("inline void __ent_str_set(void* ptr, std::string& str) { *((std::string*)ptr) = str; }\n")
-    f.write("inline const char* __ent_str_cstr(void* ptr) { return ((std::string*)ptr)->c_str(); }\n\n")
+    f.write("inline const char* __ent_str_cstr(void* ptr) { return ((std::string*)ptr)->c_str(); }\n")
+    f.write("inline std::string __ent_str_tostr(void* ptr) { return *((std::string*)(ptr)); }\n");
+    f.write("""template<typename T> std::string __ent_tostr_not_str(T val) {
+	std::stringstream ss;
+	ss << val;
+	return ss.str();
+}""");
+
+    f.write("\n\n")
     
     for i in range(1, FIELD_MAX+1):
         f.write("#define ENT_REGISTER_FIELDS_" + str(i) + "(name,")
@@ -48,7 +29,7 @@ with open("entity_fields.h", 'w') as f:
         f.write("\tvirtual inline std::string toString() override { \\\n")
         f.write("\t\treturn #name ## \" ( \"")
         for j in range(0, i):
-            f.write(" + std::to_string({var}) + \" \"".format(var="var"+str(j)))
+            f.write(" + __ent_tostr_not_str<{type0}>({var}) + \" \"".format(var="var"+str(j), type0="type"+str(j)))
         f.write(" \")\";\\\n\t}\\\n");
 
         f.write("\tvirtual inline void save(SaveFileWriter& sfw) override { \\\n")
