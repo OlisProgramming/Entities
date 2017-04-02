@@ -41,6 +41,7 @@ public:
 	~SaveFileReader();
 	void close();
 
+	std::string getEntCompName(unsigned int ind) { return entcompmap[ind]; }
 	void readEntCompMap();
 
 	template<class T> inline T read() {

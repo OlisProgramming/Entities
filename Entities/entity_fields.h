@@ -13,6 +13,9 @@ template<typename T> std::string __ent_tostr_not_str(T val) {
 	return ss.str();
 }
 
+#define ENT_REGISTER_FIELDS_0(name)     virtual inline std::string toString() override {         return #name ## " ( )";     }     virtual inline void save(SaveFileWriter& sfw) override {         sfw.write<unsigned int>(sfw.getEntCompIndex(#name));     }
+
+
 #define ENT_REGISTER_FIELDS_1(name,type0,var0) \
 public: \
 	type0 var0; \

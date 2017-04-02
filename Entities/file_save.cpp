@@ -1,6 +1,7 @@
 #include "file_save.h"
 
 SaveFileWriter::SaveFileWriter(std::string fname) {
+	std::cout << "Writing save file to " << fname << "..." << std::endl;
 	ofs.open(fname.c_str(), std::ios::out | std::ios::binary);
 	ofs.seekp(0);
 }
@@ -11,7 +12,7 @@ SaveFileWriter::~SaveFileWriter() {
 
 void SaveFileWriter::close() {
 	ofs.close();
-	delete entcomps;
+	//std::cout << "finished." << std::endl;
 }
 
 unsigned int SaveFileWriter::getEntCompIndex(std::string entcomp) {
@@ -34,6 +35,7 @@ void SaveFileWriter::writeEntCompMap(std::vector<std::string>* entcomps) {
 ///
 
 SaveFileReader::SaveFileReader(std::string fname) {
+	std::cout << "Reading save file from " << fname << "..." << std::endl;
 	ifs.open(fname.c_str(), std::ios::out | std::ios::binary);
 	ifs.seekg(0);
 }
@@ -44,6 +46,7 @@ SaveFileReader::~SaveFileReader() {
 
 void SaveFileReader::close() {
 	ifs.close();
+	//std::cout << "finished." << std::endl;
 }
 
 void SaveFileReader::readEntCompMap() {
@@ -54,12 +57,17 @@ void SaveFileReader::readEntCompMap() {
 		do {
 			c = read<char>();
 			//std::cout << c;
-			s += c;
+			if (c != '\0' && c != '\1')
+				s += c;
 		} while (c != '\0' && c != '\1');
-		entcompmap.emplace(i++, s);
+		if (c != '\1')
+			entcompmap.emplace(i++, s);
+		s = "";
 	} while (c != '\1');
 
+	std::cout << std::endl << "Entity Component Map:" << std::endl;
 	for (auto item : entcompmap) {
-		std::cout << item.first << " " << item.second << "\n";
+		std::cout << item.first << " " << item.second << std::endl;
 	}
+	std::cout << std::endl;
 }

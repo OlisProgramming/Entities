@@ -17,6 +17,17 @@ with open("entity_fields.h", 'w') as f:
 }""");
 
     f.write("\n\n")
+
+    f.write("""#define ENT_REGISTER_FIELDS_0(name) \
+    virtual inline std::string toString() override { \
+        return #name ## " ( )"; \
+    } \
+    virtual inline void save(SaveFileWriter& sfw) override { \
+        sfw.write<unsigned int>(sfw.getEntCompIndex(#name)); \
+    }
+
+
+""")
     
     for i in range(1, FIELD_MAX+1):
         f.write("#define ENT_REGISTER_FIELDS_" + str(i) + "(name,")

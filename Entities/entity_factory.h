@@ -20,6 +20,7 @@ public:
 	std::vector<std::string>* getEntComps();
 };
 
-#define ENT_REGISTER(name) EntityFactory::inst->registerEntComp(#name, []() { return new name(); })
-#define ENT_CONSTRUCT_BLANK(name) (static_cast<name*>(EntityFactory::inst->constructEntComp(#name)))
-#define ENT_CONSTRUCT_SAVED(name, sfr) (static_cast<name*>(ENT_CONSTRUCT_BLANK(name)->load(sfr)))
+#define ENT_COMP_REGISTER(name) EntityFactory::inst->registerEntComp(#name, []() { return new name(); })
+#define ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(name) (EntityFactory::inst->constructEntComp(name))
+#define ENT_COMP_CONSTRUCT_BLANK(name) ((name*)(ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(#name)))
+#define ENT_COMP_CONSTRUCT_SAVED(name, sfr) (ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(name)->load(sfr))

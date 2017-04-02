@@ -1,5 +1,6 @@
 #include "entity.h"
 
+#include <iostream>
 #include "entity_factory.h"
 
 EntityComponent::EntityComponent() {
@@ -19,10 +20,31 @@ std::string EntityComponent::toString() {
 Entity::Entity() {
 }
 
+Entity::~Entity() {
+	for (EntityComponent* comp : components) delete comp;
+}
+
+Entity* Entity::load(SaveFileReader& sfr) {
+	size_t size = sfr.read<size_t>();
+	std::cout << "Instantiating entity with " << size << " components\n";
+	for (unsigned i = 0; i < size; ++i) {
+		unsigned int ind = sfr.read<unsigned int>();
+		std::string name = sfr.getEntCompName(ind);
+		std::cout << "Registering component " << name << " (indexed " << ind << ")" << std::endl;
+		addComponent(ENT_COMP_CONSTRUCT_SAVED(name, sfr));
+	}
+	return this;
+}
+
+void Entity::save(SaveFileWriter& sfw) {
+	sfw.write<size_t>(components.size());
+	for (EntityComponent* comp : components) comp->save(sfw);
+}
+
 std::string Entity::toString() {
 	std::string s = "{ ";
-	for (EntityComponent& comp : components) {
-		s += comp.toString() + " ";
+	for (EntityComponent* comp : components) {
+		s += comp->toString() + " ";
 	}
 	return s + "}";
 }

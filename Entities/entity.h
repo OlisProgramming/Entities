@@ -16,11 +16,14 @@ public:
 class Entity {
 
 private:
-	std::vector<EntityComponent> components;
+	std::vector<EntityComponent*> components;
 
 public:
 	Entity();
-	inline void addComponent(EntityComponent comp) { components.push_back(comp); }
+	~Entity();
+	inline void addComponent(EntityComponent* comp) { components.push_back(comp); }
+	virtual Entity* load(SaveFileReader& sfr);
+	virtual void save(SaveFileWriter& sfw);
 	std::string toString();
 };
 
