@@ -6,10 +6,6 @@ SaveFileWriter::SaveFileWriter(std::string fname) {
 	ofs.seekp(0);
 }
 
-SaveFileWriter::~SaveFileWriter() {
-	close();
-}
-
 void SaveFileWriter::close() {
 	ofs.close();
 	//std::cout << "finished." << std::endl;
@@ -20,7 +16,6 @@ unsigned int SaveFileWriter::getEntCompIndex(std::string entcomp) {
 }
 
 void SaveFileWriter::writeEntCompMap(std::vector<std::string>* entcomps) {
-	this->entcomps = entcomps;
 	unsigned int i = 0;
 	for (std::string s : *entcomps) {
 		entcompmap.emplace(s, i++);
@@ -30,6 +25,7 @@ void SaveFileWriter::writeEntCompMap(std::vector<std::string>* entcomps) {
 		write('\0');
 	}
 	write('\1');
+	delete entcomps;
 }
 
 ///
@@ -38,10 +34,6 @@ SaveFileReader::SaveFileReader(std::string fname) {
 	std::cout << "Reading save file from " << fname << "..." << std::endl;
 	ifs.open(fname.c_str(), std::ios::out | std::ios::binary);
 	ifs.seekg(0);
-}
-
-SaveFileReader::~SaveFileReader() {
-	close();
 }
 
 void SaveFileReader::close() {

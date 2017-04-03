@@ -1,0 +1,71 @@
+\hypertarget{class_save_file_writer}{}\section{Save\+File\+Writer Class Reference}
+\label{class_save_file_writer}\index{Save\+File\+Writer@{Save\+File\+Writer}}
+
+
+{\ttfamily \#include $<$file\+\_\+save.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_save_file_writer_afc1540e5b1b66a18f8d3ed78d7013748}\label{class_save_file_writer_afc1540e5b1b66a18f8d3ed78d7013748}} 
+{\bfseries Save\+File\+Writer} (std\+::string fname)
+\item 
+\mbox{\Hypertarget{class_save_file_writer_a0c174fe28dc4070a9c71c78ede21a91c}\label{class_save_file_writer_a0c174fe28dc4070a9c71c78ede21a91c}} 
+void {\bfseries close} ()
+\item 
+unsigned int \hyperlink{class_save_file_writer_aa5f3b020a4d93f42f274d4c5d7f10b8c}{get\+Ent\+Comp\+Index} (std\+::string entcomp)
+\item 
+void \hyperlink{class_save_file_writer_a3b6359fa30469f5ae518eaf009951e05}{write\+Ent\+Comp\+Map} (std\+::vector$<$ std\+::string $>$ $\ast$entcomps)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{class_save_file_writer_a665e53cc0c04489c5b0872b3f8cd7218}{write} (T t)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{class_save_file_writer_a314ad7bcf58b24885ec3501d2fa206e5}{write\+\_\+array} (T $\ast$t, size\+\_\+t bytes)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Writes \hyperlink{class_entity}{Entity} data to a binary save file. Format\+:
+\begin{DoxyItemize}
+\item \hyperlink{class_entity_component}{Entity\+Component} map (\+::entcompmap) to map class names onto unsigned integers, giving \hyperlink{class_entity_component}{Entity\+Component} subclasses \textquotesingle{}aliases\textquotesingle{} so that they can be referenced with a simple unsigned int.
+\item A 0x01 character to signal the end of the block.
+\item Each \hyperlink{class_entity}{Entity} is written to the file as follows\+:
+\begin{DoxyItemize}
+\item An unsigned int detailing how many Entity\+Components it contains.
+\item Each component in turn.
+\end{DoxyItemize}
+\item (Unimplemented as currently only one entity can be saved and loaded back properly) A 0x01 character to signal the end of the block. 
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_save_file_writer_aa5f3b020a4d93f42f274d4c5d7f10b8c}\label{class_save_file_writer_aa5f3b020a4d93f42f274d4c5d7f10b8c}} 
+\index{Save\+File\+Writer@{Save\+File\+Writer}!get\+Ent\+Comp\+Index@{get\+Ent\+Comp\+Index}}
+\index{get\+Ent\+Comp\+Index@{get\+Ent\+Comp\+Index}!Save\+File\+Writer@{Save\+File\+Writer}}
+\subsubsection{\texorpdfstring{get\+Ent\+Comp\+Index()}{getEntCompIndex()}}
+{\footnotesize\ttfamily unsigned int Save\+File\+Writer\+::get\+Ent\+Comp\+Index (\begin{DoxyParamCaption}\item[{std\+::string}]{entcomp }\end{DoxyParamCaption})}
+
+Gets the alias of an \hyperlink{class_entity_component}{Entity\+Component} subclass\textquotesingle{} name. This alias is used in the save file to prefix the \hyperlink{class_entity_component}{Entity\+Component} so that we know what class it is when loading the file. \mbox{\Hypertarget{class_save_file_writer_a665e53cc0c04489c5b0872b3f8cd7218}\label{class_save_file_writer_a665e53cc0c04489c5b0872b3f8cd7218}} 
+\index{Save\+File\+Writer@{Save\+File\+Writer}!write@{write}}
+\index{write@{write}!Save\+File\+Writer@{Save\+File\+Writer}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Save\+File\+Writer\+::write (\begin{DoxyParamCaption}\item[{T}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Writes a variable to the file. \mbox{\Hypertarget{class_save_file_writer_a314ad7bcf58b24885ec3501d2fa206e5}\label{class_save_file_writer_a314ad7bcf58b24885ec3501d2fa206e5}} 
+\index{Save\+File\+Writer@{Save\+File\+Writer}!write\+\_\+array@{write\+\_\+array}}
+\index{write\+\_\+array@{write\+\_\+array}!Save\+File\+Writer@{Save\+File\+Writer}}
+\subsubsection{\texorpdfstring{write\+\_\+array()}{write\_array()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Save\+File\+Writer\+::write\+\_\+array (\begin{DoxyParamCaption}\item[{T $\ast$}]{t,  }\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Writes an array to the file. Generally the size of the array should be written to the file first, as a size\+\_\+t type. \mbox{\Hypertarget{class_save_file_writer_a3b6359fa30469f5ae518eaf009951e05}\label{class_save_file_writer_a3b6359fa30469f5ae518eaf009951e05}} 
+\index{Save\+File\+Writer@{Save\+File\+Writer}!write\+Ent\+Comp\+Map@{write\+Ent\+Comp\+Map}}
+\index{write\+Ent\+Comp\+Map@{write\+Ent\+Comp\+Map}!Save\+File\+Writer@{Save\+File\+Writer}}
+\subsubsection{\texorpdfstring{write\+Ent\+Comp\+Map()}{writeEntCompMap()}}
+{\footnotesize\ttfamily void Save\+File\+Writer\+::write\+Ent\+Comp\+Map (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ $\ast$}]{entcomps }\end{DoxyParamCaption})}
+
+Writes the map of \hyperlink{class_entity_component}{Entity\+Component} subclasses into the file. This is followed by a 0x01 character to signal the end of the block. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+file\+\_\+save.\+h\item 
+file\+\_\+save.\+cpp\end{DoxyCompactItemize}

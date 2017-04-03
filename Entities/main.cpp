@@ -38,7 +38,6 @@ public:
 int main(int argc, char** argv) {
 
 	EntityFactory::inst = new EntityFactory();
-//	EntityFactory::inst->registerEnt("EntTest1", []() { return new EntTest1(); });
 
 
 	ENT_COMP_REGISTER(EntityComponentTag);
@@ -46,7 +45,7 @@ int main(int argc, char** argv) {
 	ENT_COMP_REGISTER(EntityComponentEmpty);
 
 	Entity ent;
-	
+
 	EntityComponentPos3* entPos = ENT_COMP_CONSTRUCT_BLANK(EntityComponentPos3);
 	entPos->x = 1;
 	entPos->y = 2;
