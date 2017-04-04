@@ -37,29 +37,50 @@ EntityComponent* Entity::getComponent(std::string className) {
 	return nullptr;
 }
 
+void Entity::addChild(Entity* ent) {
+	children.push_back(ent);
+}
+
+std::vector<Entity*>& Entity::getChildren() {
+	return children;
+}
+
 
 
 Entity* Entity::load(SaveFileReader& sfr) {
-	size_t size = sfr.read<size_t>();
-	std::cout << "Instantiating entity with " << size << " components\n";
-	for (unsigned i = 0; i < size; ++i) {
+	size_t component_size = sfr.read<size_t>();
+	std::cout << "Instantiating entity with " << component_size << " components\n";
+	for (unsigned i = 0; i < component_size; ++i) {
 		unsigned int ind = sfr.read<unsigned int>();
 		std::string name = sfr.getEntCompName(ind);
 		std::cout << "Registering component " << name << " (indexed " << ind << ")" << std::endl;
 		addComponent(ENT_COMP_CONSTRUCT_SAVED(name, sfr));
 	}
+
+	size_t children_size = sfr.read<size_t>();
+	std::cout << "Entity has " << children_size << " children\n";
+	for (unsigned i = 0; i < children_size; ++i) {
+		children.push_back((new Entity)->load(sfr));
+	}
+
 	return this;
 }
 
 void Entity::save(SaveFileWriter& sfw) {
 	sfw.write<size_t>(components.size());
 	for (EntityComponent* comp : components) comp->save(sfw);
+	sfw.write<size_t>(children.size());
+	for (Entity* child : children) child->save(sfw);
 }
 
 std::string Entity::toString() {
-	std::string s = "{ ";
+	std::string s = "[Components = { ";
 	for (EntityComponent* comp : components) {
 		s += comp->toString() + " ";
 	}
-	return s + "}";
+	s += "} Children = { ";
+	for (Entity* ent : children) {
+		s += ent->toString() + " ";
+	}
+	return s + "}]";
 }

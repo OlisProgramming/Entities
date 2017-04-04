@@ -34,29 +34,34 @@ public:
 };
 
 /**
-\brief The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class
+\brief The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector of child Entities. Do not override this class
 */
 class Entity {
 
 private:
 	std::vector<EntityComponent*> components;
+	std::vector<Entity*> children;
 
 public:
 	Entity();
-	/** Deletes all EntityComponents in the private std::vector \p components. */
+	/** Deletes all EntityComponents in the private std::vector \p components, and deletes all child entities in \p children. */
 	~Entity();
 	/** Adds an EntityComponent to the private std::vector \p components. This component should be generated with the macros \p ENT_COMP_CONSTRUCT_*. */
-	inline void addComponent(EntityComponent* comp) { components.push_back(comp); }
+	virtual inline void addComponent(EntityComponent* comp) { components.push_back(comp); }
 	/** DO NOT use this function directly, use the macro #ENT_GET_COMPONENT()! Gets the first EntityComponent in this Entity with the class name of \p className. If none were found, return nullptr. */
 	EntityComponent* getComponent(std::string className);
 	/** DO NOT use this function directly, use the macro #ENT_GET_COMPONENTS()! Gets a list of all EntityComponent objects in this Entity with the class name of \p className. */
 	template<class T> std::vector<T*> getComponents(std::string className);
+	/** Adds a child Entity to the private std::vector \p children. This Entity is automatically deleted when the parent is deleted. */
+	void addChild(Entity* ent);
+	/** Gets the \p children vector. */
+	std::vector<Entity*>& getChildren();
 	/** Fills this instance with EntityComponents from the save file \p sfr. */
-	Entity* load(SaveFileReader& sfr);
+	virtual Entity* load(SaveFileReader& sfr);
 	/** Saves this instance's data to the save file \p sfw. */
-	void save(SaveFileWriter& sfw);
+	virtual void save(SaveFileWriter& sfw);
 	/** Stringifies this Entity (for debug printing messages). */
-	std::string toString();
+	virtual std::string toString();
 };
 
 template<class T> inline std::vector<T*> Entity::getComponents(std::string className) {
@@ -69,7 +74,7 @@ template<class T> inline std::vector<T*> Entity::getComponents(std::string class
 	return vec;
 }
 
-#define ENT_GET_COMPONENT(ent, _class) ((_class*)(ent.getComponent(#_class)))
-#define ENT_GET_COMPONENTS(ent, _class) (ent.getComponents<_class>(#_class))
+#define ENT_GET_COMPONENT(ent_ptr, _class) ((_class*)((ent_ptr)->getComponent(#_class)))
+#define ENT_GET_COMPONENTS(ent_ptr, _class) ((ent_ptr)->getComponents<_class>(#_class))
 
 #include "entity_fields.h"

@@ -2,44 +2,60 @@
 
 #include "entity_components.h"
 
+void demo_populate(Entity* ent) {
+	Entity* tagged = new Entity;
+	CTag* ctag = ENT_COMP_CONSTRUCT_BLANK(CTag);
+	ctag->tag = "tagged";
+	tagged->addComponent(ctag);
+	ent->addChild(tagged);
+
+	Entity* positioned = new Entity;
+	CPos3* cpos3 = ENT_COMP_CONSTRUCT_BLANK(CPos3);
+	cpos3->x = 0.f;
+	cpos3->y = 1.f;
+	cpos3->z = 2.f;
+	positioned->addComponent(cpos3);
+	ent->addChild(positioned);
+
+	Entity* group = new Entity;
+	Entity* neither = new Entity;
+	group->addChild(neither);
+	ent->addChild(group);
+}
+
+void demo_save() {
+	Entity* ent = new Entity;
+	demo_populate(ent);
+
+	SaveFileWriter sfw("save.bin");
+	sfw.writeEntCompMap(EntityFactory::inst->getEntComps());
+	ent->save(sfw);
+	sfw.close();
+
+	delete ent;
+}
+
+Entity* demo_load() {
+	Entity* ent = new Entity;
+
+	SaveFileReader sfr("save.bin");
+	sfr.readEntCompMap();
+	ent->load(sfr);
+	sfr.close();
+
+	return ent;
+}
+
 int main(int argc, char** argv) {
 
 	EntityFactory::inst = new EntityFactory();
 
 	entRegisterBaseComponents();
 
-	Entity ent;
-
-	CPos3* entPos = ENT_COMP_CONSTRUCT_BLANK(CPos3);
-	entPos->x = 1;
-	entPos->y = 2;
-	entPos->z = -0.5;
-	ent.addComponent(entPos);
-	
-	CTag* entTag = ENT_COMP_CONSTRUCT_BLANK(CTag);
-	entTag->tag = "Tagged object";
-	ent.addComponent(entTag);
-
-
-	std::cout << ent.toString() << std::endl;
-
-	SaveFileWriter sfw("save.bin");
-	sfw.writeEntCompMap(EntityFactory::inst->getEntComps());
-	ent.save(sfw);
-	sfw.close();
-
-	SaveFileReader sfr("save.bin");
-	sfr.readEntCompMap();
-	Entity ent1;
-	ent1.load(sfr);
-	sfr.close();
-	std::cout << ent1.toString() << std::endl;
-	
-	std::cout << "Ent1 was tagged as: '" << ENT_GET_COMPONENT(ent1, CTag)->tag << "'." << std::endl;
-	
-	for (auto comp : ENT_GET_COMPONENTS(ent, CPos3)) {
-		std::cout << "Pos: " << comp->x << ", " << comp->y << ", " << comp->z << "." << std::endl;
-	}
+	demo_save();
+	Entity* ent = demo_load();
+	std::cout << "Loaded: " << ent->toString();
+	delete ent;
 
 	delete EntityFactory::inst;
 
