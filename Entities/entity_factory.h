@@ -19,6 +19,9 @@ Do not interface with the EntityFactory directly, use the macros!
 
 class EntityComponent;
 
+/**
+\brief Indirectly interfaced when using \p ENT_* macros. Do not handle this class directly!
+*/
 class EntityFactory {
 
 private:
@@ -38,26 +41,26 @@ public:
 
 /**
 Registers a class with the EntityFactory.
-@param name The class name (not as a string) of the class to be registered.
+\param name The class name (not as a string) of the class to be registered.
 */
 #define ENT_COMP_REGISTER(name) EntityFactory::inst->registerEntComp(#name, []() { return new name(); })
 
 /**
 NEVER use this macro, always use #ENT_COMP_CONSTRUCT_BLANK and/or #ENT_COMP_CONSTRUCT_SAVED!
 Creates an EntityComponent subclass that has been previously registered using #ENT_COMP_REGISTER.
-@param name The (stringified) name of the class to be created.
+\param name The (stringified) name of the class to be created.
 */
 #define ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(name) (EntityFactory::inst->constructEntComp(name))
 
 /**
 Creates an EntityComponent subclass that has been previously registered using #ENT_COMP_REGISTER, then casts it to the required type.
-@param name The (non-stringified) name of the class to be created.
+\param name The (non-stringified) name of the class to be created.
 */
 #define ENT_COMP_CONSTRUCT_BLANK(name) ((name*)(ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(#name)))
 
 /**
 Creates an EntityComponent subclass that has been previously registered using #ENT_COMP_REGISTER, loads it from a save file, then casts it to the required type.
-@param name The (non-stringified) name of the class to be created.
-@param sfr The save file (SaveFileReader&) to read data from.
+\param name The (non-stringified) name of the class to be created.
+\param sfr The save file (SaveFileReader&) to read data from.
 */
 #define ENT_COMP_CONSTRUCT_SAVED(name, sfr) (ENT_COMP_CONSTRUCT_BLANK_STRING_NAMED(name)->load(sfr))

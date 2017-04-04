@@ -17,12 +17,27 @@ std::string EntityComponent::toString() {
 	return "(INVALID COMPONENT)";
 }
 
+std::string EntityComponent::getClassName() {
+	return "EntityComponent";
+}
+
 Entity::Entity() {
 }
 
 Entity::~Entity() {
 	for (EntityComponent* comp : components) delete comp;
 }
+
+EntityComponent* Entity::getComponent(std::string className) {
+	for (EntityComponent* component : components) {
+		if (component->getClassName() == className) {
+			return component;
+		}
+	}
+	return nullptr;
+}
+
+
 
 Entity* Entity::load(SaveFileReader& sfr) {
 	size_t size = sfr.read<size_t>();

@@ -2,6 +2,9 @@
 
 \mainpage
 
+\section namingConventions Naming Conventions
 
+EntityComponent subclasses should be prefixed with the letter \p C, for instance CPos3 or CTag.
+They should all be stored in global scope (i.e. no namespaces) to aid with the macros.
 
 */

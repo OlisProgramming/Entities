@@ -27,7 +27,8 @@ public: \\
     } \\
     virtual inline void save(SaveFileWriter& sfw) override { \\
         sfw.write<unsigned int>(sfw.getEntCompIndex(#name)); \\
-    }
+    } \\
+    virtual inline std::string getClassName() override { return #name; }
 
 
 """)
@@ -69,8 +70,8 @@ public: \\
 		'\t\telse \\\n'
 			'\t\t\t{var0} = sfr.read<{type0}>(); \\\n'.format(type0="type"+str(j), var0="var"+str(j)))
 
-        f.write("\t\treturn this; \\\n\t}")
-        
+        f.write("\t\treturn this; \\\n\t}\\\n")
+        f.write("virtual inline std::string getClassName() override { return #name; }")
         f.write("\n\n")
 
 print("Complete.")

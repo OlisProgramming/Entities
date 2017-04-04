@@ -66,6 +66,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The basic object. Contains a std::vector of <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> objects that control it. Do not override this class.  
+ <a href="class_entity.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="entity_8h_source.html">entity.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -74,6 +77,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adf6d3f7cb1b2ba029b6b048a395cc8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0729633dfb5e5bafbc90344ebf8084e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a0729633dfb5e5bafbc90344ebf8084e1">addComponent</a> (<a class="el" href="class_entity_component.html">EntityComponent</a> *comp)</td></tr>
 <tr class="separator:a0729633dfb5e5bafbc90344ebf8084e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f3e1bf0dca418086fd5b141f81564e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity_component.html">EntityComponent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#ae3f3e1bf0dca418086fd5b141f81564e">getComponent</a> (std::string className)</td></tr>
+<tr class="separator:ae3f3e1bf0dca418086fd5b141f81564e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a92fe8bac2b95a498ab7b13ad5dc8a9"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5a92fe8bac2b95a498ab7b13ad5dc8a9"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_entity.html#a5a92fe8bac2b95a498ab7b13ad5dc8a9">getComponents</a> (std::string className)</td></tr>
+<tr class="separator:a5a92fe8bac2b95a498ab7b13ad5dc8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6176cc5cbdcbcf50c3e504b2d2cf1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a2b6176cc5cbdcbcf50c3e504b2d2cf1e">load</a> (<a class="el" href="class_save_file_reader.html">SaveFileReader</a> &amp;sfr)</td></tr>
 <tr class="separator:a2b6176cc5cbdcbcf50c3e504b2d2cf1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50c4e0080827d7fc42d40dc183eb7226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a50c4e0080827d7fc42d40dc183eb7226">save</a> (<a class="el" href="class_save_file_writer.html">SaveFileWriter</a> &amp;sfw)</td></tr>
@@ -82,7 +90,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2d2e82ce6acc0a4c718e29563fe6cfb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains a std::vector of <a class="el" href="class_entity_component.html">EntityComponent</a> objects. Do not override this class. Entities are controlled by their EntityComponents. </p>
+<div class="textblock"><p>The basic object. Contains a std::vector of <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> objects that control it. Do not override this class. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adf6d3f7cb1b2ba029b6b048a395cc8ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf6d3f7cb1b2ba029b6b048a395cc8ae">&#9670;&nbsp;</a></span>~Entity()</h2>
@@ -126,7 +134,55 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Adds an <a class="el" href="class_entity_component.html">EntityComponent</a> to the private std::vector <code>components</code>. This component should be generated with the macros <code>ENT_COMP_CONSTRUCT_*</code>. </p>
+<p>Adds an <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> to the private std::vector <code>components</code>. This component should be generated with the macros <code>ENT_COMP_CONSTRUCT_*</code>. </p>
+
+</div>
+</div>
+<a id="ae3f3e1bf0dca418086fd5b141f81564e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3f3e1bf0dca418086fd5b141f81564e">&#9670;&nbsp;</a></span>getComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_entity_component.html">EntityComponent</a> * Entity::getComponent </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>className</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>DO NOT use this function directly, use the macro ENT_GET_COMPONENT()! Gets the first <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> in this <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> with the class name of <code>className</code>. If none were found, return nullptr. </p>
+
+</div>
+</div>
+<a id="a5a92fe8bac2b95a498ab7b13ad5dc8a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a92fe8bac2b95a498ab7b13ad5dc8a9">&#9670;&nbsp;</a></span>getComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T * &gt; Entity::getComponents </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>className</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>DO NOT use this function directly, use the macro ENT_GET_COMPONENTS()! Gets a list of all <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> objects in this <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> with the class name of <code>className</code>. </p>
 
 </div>
 </div>
@@ -182,7 +238,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Stringifies this <a class="el" href="class_entity.html">Entity</a> (for debug printing messages). </p>
+<p>Stringifies this <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> (for debug printing messages). </p>
 
 </div>
 </div>

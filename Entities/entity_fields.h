@@ -28,7 +28,8 @@ public: \
     } \
     virtual inline void save(SaveFileWriter& sfw) override { \
         sfw.write<unsigned int>(sfw.getEntCompIndex(#name)); \
-    }
+    } \
+    virtual inline std::string getClassName() override { return #name; }
 
 
 #define ENT_REGISTER_FIELDS_1(name,type0,var0) \
@@ -56,7 +57,8 @@ public: \
 		else \
 			var0 = sfr.read<type0>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_2(name,type0,var0,type1,var1) \
 public: \
@@ -98,7 +100,8 @@ public: \
 		else \
 			var1 = sfr.read<type1>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_3(name,type0,var0,type1,var1,type2,var2) \
 public: \
@@ -155,7 +158,8 @@ public: \
 		else \
 			var2 = sfr.read<type2>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_4(name,type0,var0,type1,var1,type2,var2,type3,var3) \
 public: \
@@ -227,7 +231,8 @@ public: \
 		else \
 			var3 = sfr.read<type3>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_5(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4) \
 public: \
@@ -314,7 +319,8 @@ public: \
 		else \
 			var4 = sfr.read<type4>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_6(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5) \
 public: \
@@ -416,7 +422,8 @@ public: \
 		else \
 			var5 = sfr.read<type5>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_7(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6) \
 public: \
@@ -533,7 +540,8 @@ public: \
 		else \
 			var6 = sfr.read<type6>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_8(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7) \
 public: \
@@ -665,7 +673,8 @@ public: \
 		else \
 			var7 = sfr.read<type7>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_9(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8) \
 public: \
@@ -812,7 +821,8 @@ public: \
 		else \
 			var8 = sfr.read<type8>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 
 #define ENT_REGISTER_FIELDS_10(name,type0,var0,type1,var1,type2,var2,type3,var3,type4,var4,type5,var5,type6,var6,type7,var7,type8,var8,type9,var9) \
 public: \
@@ -974,5 +984,6 @@ public: \
 		else \
 			var9 = sfr.read<type9>(); \
 		return this; \
-	}
+	}\
+virtual inline std::string getClassName() override { return #name; }
 

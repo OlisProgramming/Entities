@@ -41,5 +41,8 @@
     <ClInclude Include="entity_fields.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="entity_components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

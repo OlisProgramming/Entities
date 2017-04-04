@@ -8,7 +8,7 @@ void EntityFactory::registerEntComp(std::string name, std::function<EntityCompon
 
 EntityComponent* EntityFactory::constructEntComp(std::string name) {
 	if (map.count(name) == 0) {
-		std::cerr << "Unable to instantiate entity component of type '" << name << "'." << std::endl;
+		std::cerr << "Unable to instantiate entity component of type '" << name << "'. Has it been registered with the EntityFactory singleton instance yet?" << std::endl;
 		for (unsigned int i = 0; i < name.size(); ++i)
 			std::cerr << i << ": " << name[i] << std::endl;
 		system("PAUSE");

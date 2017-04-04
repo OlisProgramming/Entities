@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entity_components.h" />
     <ClInclude Include="entity_factory.h" />
     <ClInclude Include="entity_fields.h" />
     <ClInclude Include="file_save.h" />
