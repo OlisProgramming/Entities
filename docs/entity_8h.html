@@ -97,20 +97,20 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for all EntityComponents (named <code>C</code>...)  <a href="class_entity_component.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html">Entity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The basic object. Contains a std::vector of <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> objects that control it. Do not override this class.  <a href="class_entity.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The basic object. Contains a std::vector of <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> objects that control it and a std::vector of child Entities. Do not override this class.  <a href="class_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a892af8749fea5025202a4decbac42cf6"><td class="memItemLeft" align="right" valign="top"><a id="a892af8749fea5025202a4decbac42cf6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ENT_GET_COMPONENT</b>(ent,  _class)&#160;&#160;&#160;((_class*)(ent.getComponent(#_class)))</td></tr>
-<tr class="separator:a892af8749fea5025202a4decbac42cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2364d9f9f09133157e657e1b8467bb"><td class="memItemLeft" align="right" valign="top"><a id="abe2364d9f9f09133157e657e1b8467bb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ENT_GET_COMPONENTS</b>(ent,  _class)&#160;&#160;&#160;(ent.getComponents&lt;_class&gt;(#_class))</td></tr>
-<tr class="separator:abe2364d9f9f09133157e657e1b8467bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a425c73de282ec172b8f77fb66ea5e"><td class="memItemLeft" align="right" valign="top"><a id="a33a425c73de282ec172b8f77fb66ea5e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ENT_GET_COMPONENT</b>(ent_ptr,  _class)&#160;&#160;&#160;((_class*)((ent_ptr)-&gt;getComponent(#_class)))</td></tr>
+<tr class="separator:a33a425c73de282ec172b8f77fb66ea5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b9a5d1cf702e6c319364c469162ad4"><td class="memItemLeft" align="right" valign="top"><a id="a80b9a5d1cf702e6c319364c469162ad4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ENT_GET_COMPONENTS</b>(ent_ptr,  _class)&#160;&#160;&#160;((ent_ptr)-&gt;getComponents&lt;_class&gt;(#_class))</td></tr>
+<tr class="separator:a80b9a5d1cf702e6c319364c469162ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains the classes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> and <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a>, as well as many macros aiding the use of these classes. </p>
+<div class="textblock"><p>Contains the classes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector...">Entity</a> and <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a>, as well as many macros aiding the use of these classes. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -66,7 +66,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Writes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> data to a binary save file.  
+<p>Writes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector...">Entity</a> data to a binary save file.  
  <a href="class_save_file_writer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="file__save_8h_source.html">file_save.h</a>&gt;</code></p>
@@ -89,11 +89,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a314ad7bcf58b24885ec3501d2fa206e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Writes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> data to a binary save file. </p>
+<div class="textblock"><p>Writes <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector...">Entity</a> data to a binary save file. </p>
 <p>Format:</p><ul>
 <li><a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> map (::entcompmap) to map class names onto unsigned integers, giving <a class="el" href="class_entity_component.html" title="Base class for all EntityComponents (named C...) ">EntityComponent</a> subclasses 'aliases' so that they can be referenced with a simple unsigned int.</li>
 <li>A 0x01 character to signal the end of the block.</li>
-<li>Each <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> is written to the file as follows:<ul>
+<li>Each <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector...">Entity</a> is written to the file as follows:<ul>
 <li>An unsigned int detailing how many EntityComponents it contains.</li>
 <li>Each component in turn.</li>
 </ul>

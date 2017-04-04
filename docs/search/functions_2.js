@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['getchildren',['getChildren',['../class_entity.html#aeece0ee08d799fdbd5e064f2dbb7011d',1,'Entity']]],
   ['getclassname',['getClassName',['../class_entity_component.html#af6c94e14a627dc11e913c61cb3641c3d',1,'EntityComponent']]],
   ['getcomponent',['getComponent',['../class_entity.html#ae3f3e1bf0dca418086fd5b141f81564e',1,'Entity']]],
   ['getcomponents',['getComponents',['../class_entity.html#a5a92fe8bac2b95a498ab7b13ad5dc8a9',1,'Entity']]],

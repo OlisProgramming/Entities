@@ -93,7 +93,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for all EntityComponents (named <code>C</code>...) </p>
-<p>Override this class, but if overriding subclasses of this class, DO NOT reuse the macros mentioned below, i.e. do not have any more saveable data. Instances of these classes are members of <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it. Do not override this class. ">Entity</a> objects.</p>
+<p>Override this class, but if overriding subclasses of this class, DO NOT reuse the macros mentioned below, i.e. do not have any more saveable data. Instances of these classes are members of <a class="el" href="class_entity.html" title="The basic object. Contains a std::vector of EntityComponent objects that control it and a std::vector...">Entity</a> objects.</p>
 <p>Inside derived class definitions, place the macro <code>ENT_REGISTER_FIELDS_n</code> (declared in file <a class="el" href="entity__fields_8h.html">entity_fields.h</a>), where <code>n</code> is the amount of fields in the class you would like to be saved into a save file. Even if you do not wish to save any data in save files, you MUST still declare one of these macros (in this case, <code>ENT_REGISTER_FIELDS_0</code>).</p>
 <p>Do not override ::load(), ::save() or ::toString(), since these are handled by the macros mentioned above (<code>ENT_REGISTER_FIELDS_0</code> through 10). </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
